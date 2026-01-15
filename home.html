@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MS SOLUTION</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <!-- Navbar - Outside Header -->
+    <nav class="navbar" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="assets/imgs/logo.png" alt="MS Solution">
+                <span>MS Solution</span>
+            </a>
+
+            <div class="nav-links">
+                <a class="nav-link active" href="#">HOME</a>
+                <a class="nav-link" href="#">ABOUT US</a>
+                <a class="nav-link" href="#">SERVICES</a>
+                <a class="nav-link" href="#">CONTACT US</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Full Page Header -->
+    <div class="header">
+        <!-- Particle Canvas -->
+        <canvas id="particleCanvas"></canvas>
+
+        <!-- Slider -->
+        <div class="slider-container">
+            <div class="slider-arrow left-arrow" onclick="prevSlide()">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h2 class="slide-heading-small">Software & Development</h2>
+                        <h1 class="slide-heading-big">For Your Digital Success</h1>
+                        <p class="slide-tagline">Full Stack Desktop + Mobile App Developers</p>
+                        <p class="slide-subtitle">Scale Your Business Fast With Expert, Affordable technical consulting, and software development capability.</p>
+                        <p class="slide-desc">We make software accessible, understandable, and achievable for entrepreneurs, start-ups, and SMEs. Building mobile apps, websites, Softwares, and much more.</p>
+                    </div>
+                    <div class="slide-img">
+                        <img src="assets/imgs/IMG1.png" alt="Web Development">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h2 class="slide-heading-small">Mobile App Development</h2>
+                        <h1 class="slide-heading-big">Build Your Dream App</h1>
+                        <p class="slide-tagline">iOS + Android + Cross Platform Solutions</p>
+                        <p class="slide-subtitle">Transform your ideas into powerful mobile applications with our expert development team.</p>
+                        <p class="slide-desc">We create native and cross-platform apps for iOS and Android that deliver exceptional user experiences and drive business growth.</p>
+                    </div>
+                    <div class="slide-img">
+                        <img src="assets/imgs/IMG2.png" alt="App Development">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h2 class="slide-heading-small">UI/UX Design Services</h2>
+                        <h1 class="slide-heading-big">Design That Converts</h1>
+                        <p class="slide-tagline">User Experience + Interface Design Experts</p>
+                        <p class="slide-subtitle">Creating beautiful and intuitive user interfaces that deliver exceptional experiences.</p>
+                        <p class="slide-desc">Design that converts visitors into customers. We focus on user-centered design principles to create engaging digital products.</p>
+                    </div>
+                    <div class="slide-img">
+                        <img src="assets/imgs/IMG3.png" alt="UI/UX Design">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h2 class="slide-heading-small">Digital Marketing & SEO</h2>
+                        <h1 class="slide-heading-big">Grow Your Business Online</h1>
+                        <p class="slide-tagline">SEO + Social Media + Content Marketing</p>
+                        <p class="slide-subtitle">Boost your online presence with our comprehensive digital marketing strategies.</p>
+                        <p class="slide-desc">We help you reach your target audience, increase brand visibility, and grow your business through SEO, social media, and content marketing.</p>
+                    </div>
+                    <div class="slide-img">
+                        <img src="assets/imgs/IMG4.png" alt="Digital Marketing">
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-arrow right-arrow" onclick="nextSlide()">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+
+
+<!-- About Secsion -->
+
+
+
+<!-- About Secsion end-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Scroll Space -->
+    <div class="scroll-space"></div>
+
+    <!-- Navbar Scroll Effect -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+    <!-- Slider Script -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let autoSlideInterval;
+        let isTransitioning = false;
+
+        function showSlide(index) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            // Fade out current slide
+            slides.forEach((slide, i) => {
+                if (slide.classList.contains('active')) {
+                    slide.style.opacity = '0';
+                    setTimeout(() => {
+                        slide.classList.remove('active');
+                    }, 800);
+                }
+            });
+
+            // Fade in new slide after delay
+            setTimeout(() => {
+                slides[index].classList.add('active');
+                slides[index].style.opacity = '1';
+                isTransitioning = false;
+            }, 900);
+        }
+
+        function nextSlide() {
+            if (isTransitioning) return;
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+            resetAutoSlide();
+        }
+
+        function prevSlide() {
+            if (isTransitioning) return;
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+            resetAutoSlide();
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(nextSlide, 6000);
+        }
+
+        autoSlideInterval = setInterval(nextSlide, 6000);
+    </script>
+
+    <!-- Particle Animation -->
+    <script>
+        const canvas = document.getElementById("particleCanvas");
+        const ctx = canvas.getContext("2d");
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth * 0.35;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+
+        let mouse = { x: null, y: null };
+
+        window.addEventListener("mousemove", e => {
+            if (e.clientX < window.innerWidth * 0.35) {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            } else {
+                mouse.x = null;
+                mouse.y = null;
+            }
+        });
+
+        window.addEventListener("mouseout", () => { mouse.x = null; mouse.y = null; });
+
+        const particles = [];
+        const maxParticles = 50;
+
+        function createParticle(pos) {
+            let x, y;
+            if (pos === 'top') {
+                // Top-left corner only - NOT under text
+                x = 20 + Math.random() * 280;
+                y = 50 + Math.random() * 200;
+            } else {
+                // Bottom-left corner only
+                x = 20 + Math.random() * 300;
+                y = canvas.height - 220 + Math.random() * 190;
+            }
+            return {
+                x, y,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2 + 1.5,
+                pos,
+                opacity: Math.random() * 0.5 + 0.5,
+                fadeIn: true,
+                life: Math.random() * 350 + 250
+            };
+        }
+
+        for (let i = 0; i < maxParticles; i++) {
+            particles.push(createParticle(i < maxParticles / 2 ? 'top' : 'bottom'));
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.fadeIn) {
+                    p.opacity += 0.02;
+                    if (p.opacity >= 1) { p.opacity = 1; p.fadeIn = false; }
+                }
+                p.life--;
+                if (p.life < 50) p.opacity -= 0.02;
+
+                if (p.life <= 0 || p.opacity <= 0) {
+                    particles.splice(i, 1);
+                    particles.push(createParticle(Math.random() > 0.5 ? 'top' : 'bottom'));
+                    continue;
+                }
+
+                // Keep particles in corners only
+                if (p.pos === 'top') {
+                    if (p.x < 15 || p.x > 300) p.vx *= -1;
+                    if (p.y < 40 || p.y > 260) p.vy *= -1;
+                } else {
+                    if (p.x < 15 || p.x > 320) p.vx *= -1;
+                    if (p.y < canvas.height - 230 || p.y > canvas.height - 20) p.vy *= -1;
+                }
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(30, 200, 252, ${p.opacity})`;
+                ctx.fill();
+            }
+
+            // Connect particles
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    if (particles[i].pos !== particles[j].pos) continue;
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(30, 200, 252, ${Math.min(particles[i].opacity, particles[j].opacity) * (0.4 - dist / 250)})`;
+                        ctx.lineWidth = 0.7;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Mouse connection
+            if (mouse.x && mouse.y) {
+                particles.forEach(p => {
+                    const dist = Math.sqrt((p.x - mouse.x) ** 2 + (p.y - mouse.y) ** 2);
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(30, 200, 252, ${p.opacity * (1 - dist / 130)})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                });
+                ctx.beginPath();
+                ctx.arc(mouse.x, mouse.y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = "#1ec8fc";
+                ctx.fill();
+            }
+            requestAnimationFrame(draw);
+        }
+        draw();
+        window.addEventListener("resize", setCanvasSize);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
